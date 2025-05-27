@@ -2,13 +2,19 @@ COPY hotel.customer(id,dct_typ_id,first_name,middle_name,last_name,second_last_n
 FROM 'C:\fuente1\customer2.csv'
 WITH DELIMITER AS ';' CSV QUOTE AS '"';
 
-COPY hotel.service(id, name, price, agr_id)
-FROM 'C:\fuente1\servicios_hotel.csv'
+COPY hotel.detail_reservation(rsv_id, line_item_id, room_id, price, quantity, check_in,check_out,discount,discount_value,subtotal)
+FROM 'C:\fuente1\detalle_r_final.csv'
 WITH DELIMITER AS ';' CSV QUOTE AS '"';
 
+SELECT * FROM hoteL.reservation
+WHERE id=11
+
+COPY hotel.detail_service(srv_id,line_item_id,rsv_id,price,quantity,sub_total)
+FROM 'C:\fuente1\detalle_ser_final.csv'
+WITH DELIMITER AS ';' CSV QUOTE AS '"';
 
 COPY hotel.reservation(id,status,reservation_source,date,total,cst_id,stf_id)
-FROM 'C:\fuente1\reservas_generadas_extra.csv'
+FROM 'C:\fuente1\reservas_final.csv'
 WITH DELIMITER AS ';' CSV QUOTE AS '"';
 
 -- INSERT INTO hotel.hotel (id, name, phone_number, email, total_rooms)
@@ -29,6 +35,7 @@ VALUES (2,2,2,0,1,0);
 INSERT INTO hotel.detail_reservation (rsv_id, line_item_id, room_id, price, quantity, check_in,check_out,discount,discount_value,subtotal)
 VALUES (2,4,109,0,1,'21/08/2019','22/08/2019',5,0,0);
 
+SELECT * FROM hoteL.detail_service
 SELECT * FROM hoteL.detail_reservation
 -- ALTER TABLE hotel.reservation
 -- ALTER COLUMN stf_id TYPE VARCHAR(5);
@@ -45,7 +52,7 @@ ALTER TABLE hotel.room ADD COLUMN room_number VARCHAR(3) NOT NULL;
 
 ALTER TABLE hotel.service DROP COLUMN total;
 
-
-
+SELECT * FROM hoteL.service
+WHERE id=11
 
 
